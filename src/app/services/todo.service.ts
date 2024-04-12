@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {ITodo} from "../models/todo.interface";
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
 
+  private todos: Array<ITodo> = [];
   private _mock: ITodo[] = [
-    {
+  /*  {
       "id":1,
       "title": "Opossum, american virginia",
       "description": "Didelphis virginiana",
@@ -124,14 +126,14 @@ export class TodoService {
       "isArchived": true,
       "endDate": "3/27/2024",
       "selected": false
-    }
+    }*/
 
   ]
 
 
-  private _todoSubject: BehaviorSubject<Array<ITodo>> = new BehaviorSubject(this._mock);
+  private _todoSubject: BehaviorSubject<Array<ITodo>> = new BehaviorSubject(this.todos);
 
-  private _singleTodoSubject: BehaviorSubject<ITodo> = new BehaviorSubject(this._mock[0]);
+  private _singleTodoSubject: BehaviorSubject<ITodo> = new BehaviorSubject(this.todos.length ? this.todos[0] : null );
 
   constructor() { }
 
@@ -147,8 +149,19 @@ export class TodoService {
   }
 
   public setSelectedTodo(todo: ITodo){
-    console.log(this._mock)
-    this._singleTodoSubject.getValue().selected = false;
+    console.log(this.todos)
+    const oldTodo: ITodo = this._singleTodoSubject.getValue();
+    if(!!oldTodo){
+      this._singleTodoSubject.getValue().selected = false;
+    }
+
     this._singleTodoSubject.next(todo);
+  }
+
+  public addNewTodo(newTodo:ITodo){
+    const existingTodos: Array<ITodo> = this._todoSubject.value;
+    existingTodos.push(newTodo);
+    this._todoSubject.next(existingTodos);
+    console.log(newTodo.id);
   }
 }

@@ -1,1 +1,31 @@
-<p>new-todo works!</p>
+<form novalidate (ngSubmit)="onNewSubmit()" #f="ngForm">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Todo name</mat-label>
+    <input ngModel name="title" matInput placeholder="What is your task?">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Todo description</mat-label>
+    <input ngModel name="description" matInput placeholder="What is your task?">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Choose a date</mat-label>
+    <input ngModel name="date" matInput [matDatepicker]="picker">
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker">
+      <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+    </mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+
+
+  <button mat-raised-button color="primary"  type="submit">Submit</button>
+
+</form>
+
+<pre>
+  {{f.value | json}}
+</pre>

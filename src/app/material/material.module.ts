@@ -6,6 +6,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
 
 
 const modules=[
@@ -14,7 +16,11 @@ const modules=[
   MatButtonModule,
   MatCardModule,
   MatDividerModule,
-  MatDialogModule]
+  MatDialogModule,
+  MatDatepickerModule,
+  MatNativeDateModule
+
+  ]
 @NgModule({
   declarations: [],
   imports: [
