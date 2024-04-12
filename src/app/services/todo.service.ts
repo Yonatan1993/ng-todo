@@ -9,137 +9,121 @@ export class TodoService {
 
   private _mock: ITodo[] = [
     {
+      "id":1,
       "title": "Opossum, american virginia",
       "description": "Didelphis virginiana",
       "isCompleted": false,
       "isArchived": false,
-      "endDate": "7/29/2023"
+      "endDate": "7/29/2023",
+      "selected" : false
     },
     {
+      "id":2,
       "title": "Brown pelican",
       "description": "Pelecanus occidentalis",
       "isCompleted": false,
-      "isArchived": true,
-      "endDate": "3/21/2024"
+      "isArchived": false,
+      "endDate": "3/21/2024",
+      "selected": false
     },
     {
+      "id":3,
       "title": "Red-winged hawk (unidentified)",
       "description": "unavailable",
-      "isCompleted": true,
-      "isArchived": true,
-      "endDate": "7/9/2023"
+      "isCompleted": false,
+      "isArchived": false,
+      "endDate": "7/9/2023",
+      "selected": false
     },
     {
+      "id":4,
       "title": "Western bearded dragon",
       "description": "Amphibolurus barbatus",
       "isCompleted": false,
       "isArchived": false,
-      "endDate": "12/3/2023"
+      "endDate": "12/3/2023",
+      "selected": false
     },
     {
+      "id":5,
       "title": "Coatimundi, white-nosed",
       "description": "Nasua narica",
       "isCompleted": false,
-      "isArchived": true,
-      "endDate": "10/25/2023"
+      "isArchived": false,
+      "endDate": "10/25/2023",
+      "selected": false
     },
     {
+      "id":6,
       "title": "Stork, european",
       "description": "Ciconia ciconia",
-      "isCompleted": true,
-      "isArchived": true,
-      "endDate": "1/31/2024"
+      "isCompleted": false,
+      "isArchived": false,
+      "endDate": "1/31/2024",
+      "selected": false
     },
     {
+      "id":7,
       "title": "Glossy starling (unidentified)",
       "description": "Lamprotornis sp.",
       "isCompleted": false,
-      "isArchived": true,
-      "endDate": "11/12/2023"
+      "isArchived": false,
+      "endDate": "11/12/2023",
+      "selected": false
     },
     {
+      "id":8,
       "title": "Goose, andean",
       "description": "Chloephaga melanoptera",
       "isCompleted": false,
       "isArchived": false,
-      "endDate": "9/2/2023"
+      "endDate": "9/2/2023",
+      "selected": false
     },
     {
+      "id":9,
       "title": "Red-tailed phascogale",
       "description": "Phascogale calura",
       "isCompleted": false,
       "isArchived": false,
-      "endDate": "2/6/2024"
+      "endDate": "2/6/2024",
+      "selected": false
     },
     {
+      "id":10,
       "title": "Cape clawless otter",
       "description": "Aonyx capensis",
-      "isCompleted": true,
-      "isArchived": true,
-      "endDate": "11/11/2023"
+      "isCompleted": false,
+      "isArchived": false,
+      "endDate": "11/11/2023",
+      "selected": false
     },
     {
+      "id":11,
       "title": "Trumpeter, green-winged",
       "description": "Psophia viridis",
       "isCompleted": false,
-      "isArchived": true,
-      "endDate": "9/2/2023"
+      "isArchived": false,
+      "endDate": "9/2/2023",
+      "selected": false
     },
     {
+      "id":12,
       "title": "Boat-billed heron",
       "description": "Cochlearius cochlearius",
-      "isCompleted": true,
+      "isCompleted": false,
       "isArchived": true,
-      "endDate": "3/4/2024"
+      "endDate": "3/4/2024",
+      "selected": false
     },
     {
+      "id":13,
       "title": "Bent-toed gecko",
       "description": "Cyrtodactylus louisiadensis",
       "isCompleted": false,
       "isArchived": true,
-      "endDate": "3/27/2024"
-    },
-    {
-      "title": "Bird, black-throated butcher",
-      "description": "Cracticus nigroagularis",
-      "isCompleted": false,
-      "isArchived": false,
-      "endDate": "12/28/2023"
-    },
-    {
-      "title": "Turaco, violet-crested",
-      "description": "Tauraco porphyrelophus",
-      "isCompleted": false,
-      "isArchived": false,
-      "endDate": "3/27/2024"
-    },
-    {
-      "title": "European wild cat",
-      "description": "Felis silvestris lybica",
-      "isCompleted": true,
-      "isArchived": true,
-      "endDate": "8/7/2023"
-    },
-    {
-      "title": "White-necked stork",
-      "description": "Ciconia episcopus",
-      "isCompleted": true,
-      "isArchived": false,
-      "endDate": "12/9/2023"
-    },
-    {
-      "title": "Stork, woolly-necked",
-      "description": "Ciconia episcopus",
-      "isCompleted": true,
-      "isArchived": false,
-      "endDate": "10/30/2023"
-    },
-    {
-      "title": "Rufous tree pie",
-      "description": "Dendrocitta vagabunda",
-      "isCompleted": true,
-      "isArchived": false,
-      "endDate": "5/18/2023"
+      "endDate": "3/27/2024",
+      "selected": false
     }
 
   ]
@@ -147,9 +131,24 @@ export class TodoService {
 
   private _todoSubject: BehaviorSubject<Array<ITodo>> = new BehaviorSubject(this._mock);
 
+  private _singleTodoSubject: BehaviorSubject<ITodo> = new BehaviorSubject(this._mock[0]);
+
   constructor() { }
 
   public  getTodos(): Observable<Array<ITodo>>{
     return this._todoSubject.asObservable()
+
+
+  }
+
+  public  getSelectedTodo() : Observable<ITodo>{
+    return this._singleTodoSubject.asObservable();
+
+  }
+
+  public setSelectedTodo(todo: ITodo){
+    console.log(this._mock)
+    this._singleTodoSubject.getValue().selected = false;
+    this._singleTodoSubject.next(todo);
   }
 }

@@ -1,0 +1,18 @@
+.button-row {
+
+  font-size: 14px;
+  margin-left: 8px;
+  min-width: 120px;
+  }
+
+button{
+  margin : 8px
+}
+
+.todo-card{
+
+  max-width: 400px;
+  margin-bottom: 8px;
+
+}
+

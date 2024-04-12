@@ -27,4 +27,9 @@ export class TodoListComponent implements OnInit,OnDestroy{
     )
     }
 
+    public onTodoClick(todo:ITodo,index : number): void{
+      this.todoService.setSelectedTodo(todo);
+      this.todos[index].selected = true;
+    }
+
 }
