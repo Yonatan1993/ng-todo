@@ -17,8 +17,8 @@ export class NewTodoComponent {
   }
 
   onNewSubmit(): void {
-
-  const formValues =this.form.form.value
+  if(this.form.valid){
+    const formValues =this.form.form.value
     const newTodo:ITodo = {
       id: uuidv4(),
       title: formValues.title,
@@ -30,6 +30,9 @@ export class NewTodoComponent {
     }
     this.todoService.addNewTodo(newTodo);
     this.dialog.closeAll();
-    //console.dir(this.form);
+    console.dir(this.form);
   }
+
+  }
+
 }
