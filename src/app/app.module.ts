@@ -12,6 +12,7 @@ import { NewTodoComponent } from './components/new-todo/new-todo.component';
 import { TodoContainerComponent } from './todo-container/todo-container.component';
 import {FormsModule} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
+import { CountDownComponent } from './components/count-down/count-down.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {MatInputModule} from "@angular/material/input";
     TodoComponent,
     NewTodoComponent,
     TodoContainerComponent,
+    CountDownComponent,
 
   ],
   imports: [

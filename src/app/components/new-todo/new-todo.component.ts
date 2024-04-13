@@ -12,6 +12,7 @@ import {v4 as uuidv4} from 'uuid';
 })
 export class NewTodoComponent {
   @ViewChild('f') form: NgForm;
+  public minDate: Date = new Date();
 
   constructor(public  dialog:MatDialog,private todoService: TodoService) {
   }

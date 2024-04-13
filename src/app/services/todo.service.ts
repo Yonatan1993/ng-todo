@@ -139,11 +139,14 @@ export class TodoService {
 
   public  getTodos(): Observable<Array<ITodo>>{
     if(!this._todoSubject.value.length){
+
       const  todosString = localStorage.getItem('todos');
-      debugger;
       if(todosString){
         const exisitingTodos : Array<ITodo> = JSON.parse(todosString);
+        //Here I make sure that in the local storage the first will be selected
+        exisitingTodos.forEach(todo=>{todo.selected=false})
         exisitingTodos[0].selected = true;
+        //***
         this._todoSubject.next(exisitingTodos);
         this._singleTodoSubject.next(exisitingTodos[0]);
       }
@@ -176,4 +179,14 @@ export class TodoService {
 
     localStorage.setItem("todos",JSON.stringify(existingTodos));
   }
+
+  public  onActionTodo(todoId: string, action : string){
+    debugger;
+    const existingTodos: Array<ITodo> = this._todoSubject.value;
+    const  todoIndex = existingTodos.findIndex(singleTodo => singleTodo.id === todoId);
+    existingTodos[todoIndex][action] = true;
+    localStorage.setItem("todos",JSON.stringify(existingTodos));
+  }
+
+
 }
